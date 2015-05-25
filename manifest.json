@@ -1,0 +1,20 @@
+{
+  "name": "Batch Reply for GMail",
+  "description": "Adds button to reply to all selected conversations on Gmail™.",
+  "version": "6",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": ["inboxsdk.js", "reply.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/"
+  ],
+  "manifest_version": 2
+}
