@@ -12,7 +12,16 @@ function register(sdk) {
 
     var emails = [];
     for (var contact in contacts) {
-      emails.push(contacts[contact].emailAddress);
+      var email = contacts[contact].emailAddress;
+      if (email === sdk.User.getEmailAddress()) {
+        continue;
+      }
+
+      if (emails.indexOf(email) !== -1) {
+        continue;
+      }
+
+      emails.push(email);
     }
 
     sdk.Compose.openNewComposeView().then(function(composeView) {
@@ -23,7 +32,7 @@ function register(sdk) {
   sdk.Toolbars.registerToolbarButtonForList({
     title: 'Batch Reply',
     section: sdk.Toolbars.SectionNames.INBOX_STATE,
-    iconUrl: '',
+    iconUrl: chrome.extension.getURL('reply.png'),
     onClick: batchReply,
     hasDropdown: false,
     hideFor: whenNoneSelected,
